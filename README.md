@@ -93,11 +93,14 @@ npx wdio run .\config\wdio.android.conf.js --spec .\test\specs\selected-spec.js
 
 ```
 
-To run the tests with github actions, use the following steps:
+To run the tests with github actions and Browserstack integration, use the following steps:
 
 ```bash {"id":"01J86NFYHKPP0GGVEZBQZ7MM4W"}
-# Access the ACTIONS tab in github 
-# 
+- Access the "Actions" tab in GitHub 
+- Click on the "Run Workflow" button  
+- Select main branch
+- Select the test file to run 
+- Press the "Run workflow" button 
 ```
 
 This command will start WebdriverIO, interact with android emulator and execute the tests defined in the test specifications.
