@@ -1,5 +1,5 @@
 
-describe("API Demos APP", ()=>{
+describe("API Demos APP - Views", ()=>{
 
     beforeEach(async () => {
         await driver.startActivity('com.hmh.api', 'com.hmh.api.ApiDemos')        
@@ -102,5 +102,29 @@ describe("API Demos APP", ()=>{
 
         const expectText = await $('android=new UiSelector().resourceId("com.hmh.api:id/drag_text")')
         await expect(expectText).toHaveTextContaining('Dot : com.hmh.api.view.DraggableDot')
+    })
+
+    it("[Api Demos][Views] Test vertical view", async ()=>{
+        
+        await browser.pause(2000)
+        await $('//android.widget.TextView[@text="Views"]').click()
+        await browser.pause(1000)
+        //await $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollToEnd(1,5)')
+        await $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollTextIntoView("WebView")')
+        await browser.pause(1000)
+        await expect($('//android.widget.TextView[@text="WebView"]')).toExist()
+    })
+
+    it("[Api Demos][Views] Test horizontal view", async ()=>{
+        
+        await browser.pause(2000)
+        await $('//android.widget.TextView[@text="Views"]').click()
+        await browser.pause(1000)
+        await $('//android.widget.TextView[@text="Gallery"]').click()
+        await browser.pause(1000)
+        await $('//android.widget.TextView[@text="1. Photos"]').click()
+        await browser.pause(1000)
+        await $('android=new UiScrollable(new UiSelector().scrollable(true)).setAsHorizontalList().scrollForward(5)')
+        
     })
 })

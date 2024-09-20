@@ -1,18 +1,47 @@
 name: CI
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      test_file:
+        description: "Select the test file to run"
+        required: true
+        default: "test/specs/swagLabs/login.js"
+        type: choice
+        options:
+          - "test/specs/apiDemos/app/alert.js"
+          - "test/specs/apiDemos/app/voiceRecognition.js"
+          - "test/specs/apiDemos/views/views.js"
+          - "test/specs/examples/classdemo.js"
+          - "test/specs/examples/inputbox.js"
+          - "test/specs/examples/multipleList.js"
+          - "test/specs/examples/sampleHook.js"
+          - "test/specs/examples/xpathdemo.js"
+          - "test/specs/swagLabs/login.js"
+          - "test/specs/swagLabs/order.js"
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-        - name: Checkout
-          uses: actions/checkout@v2
-        - uses: actions/setup-node@v1
-          with:
-            node-version: 18
-        - name: Install
-          run: npm install
-        - name: Test
-          run: npx wdio config/wdio.bs.conf.js --spec test/specs/classdemo.js
-        - uses: actions/upload-artifact@v1
-          if: failure()
-         
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 18
+      - name: Install
+        run: npm install
+
+      - name: Run tests with selected test file
+        run: |
+          TEST_FILE=${{ github.event.inputs.test_file }}
+          npx wdio config/wdio.bs.conf.js --spec $TEST_FILE
+        env:
+          NODE_ENV: development
+      
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: test-results
+          path: ./test-results/

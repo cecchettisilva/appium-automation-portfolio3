@@ -11,7 +11,7 @@ context("API Demos", () => {
     })
 
     //WIP
-    describe("API Demos APP", ()=>{
+    describe("API Demos APP - Voice Recognition", ()=>{
     
         it("[Api Demos][App] Assert voice recognition", async () =>{
             

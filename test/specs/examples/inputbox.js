@@ -1,4 +1,4 @@
-context("API Demos", () => {
+context("Chrome", () => {
 
     beforeEach(async () => {
         await driver.startActivity('com.android.chrome', 'com.google.android.apps.chrome.Main')        
@@ -8,7 +8,7 @@ context("API Demos", () => {
         await driver.terminateApp('com.android.chrome')
     })
 
-    describe("input", ()=>{
+    describe("Example input", ()=>{
         
         it("test input values", async ()=>{ 
             await browser.pause(1000)

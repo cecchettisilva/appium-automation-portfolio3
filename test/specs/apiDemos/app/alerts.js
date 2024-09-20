@@ -8,9 +8,9 @@ context("API Demos", () => {
         await driver.terminateApp('com.hmh.api')
     })
 
-    describe("alerts", () =>{
+    describe("API Demos APP - Alerts", () =>{
 
-        it("example testing alerts", async ()=>{
+        it("[Api Demos][App] Testing alerts - @demo", async ()=>{
             
             await browser.pause(2000)
             await $('(//android.widget.TextView[@resource-id="android:id/text1"])[3]').click()
