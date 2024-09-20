@@ -16,7 +16,7 @@ config.capabilities= [{
     'appium:deviceName': 'Android GoogleAPI Emulator', // or "iPhone Simulator"
     'appium:platformVersion': '11.0', // or "16.2" (for running iOS v16)
     'appium:automationName': 'UiAutomator2', // or "XCUITest"
-    "appium:App": path.join(process.cwd(), "\\app\\API Demos_4.0_apkcombo.com.apk")
+    //"appium:App": path.join(process.cwd(), "\\app\\API Demos_4.0_apkcombo.com.apk")
 }]
 
 exports.config = config;

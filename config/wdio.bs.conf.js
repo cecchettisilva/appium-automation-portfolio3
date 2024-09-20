@@ -8,7 +8,7 @@ exports.config = {
       [
         'browserstack',
         {
-          app: 'bs://80d69dbb3d965cbaa74e9d08153a9e53bd0f8ace',
+          app: process.env.BROWSERSTACK_APP_KEY,
           buildIdentifier: "12.0",
           browserstackLocal: true
         },
@@ -43,5 +43,5 @@ exports.config = {
         percyCaptureMode: false
       }
     },
-  maxInstances: 10,
+    maxInstances: 10,
 }
