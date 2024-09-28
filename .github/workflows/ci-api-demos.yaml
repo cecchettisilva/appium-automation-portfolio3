@@ -1,4 +1,4 @@
-name: CI
+name: CI API Demos APP
 on:
   # push:
   # pull_request:
@@ -7,19 +7,12 @@ on:
       test_file:
         description: "Select the test file to run"
         required: true
-        default: "test/specs/swagLabs/login.js"
+        default: "./test/specs/apiDemos/views/views.js"
         type: choice
         options:
-          - "test/specs/apiDemos/app/alert.js"
-          - "test/specs/apiDemos/app/voiceRecognition.js"
-          - "test/specs/apiDemos/views/views.js"
-          - "test/specs/examples/classdemo.js"
-          - "test/specs/examples/inputbox.js"
-          - "test/specs/examples/multipleList.js"
-          - "test/specs/examples/sampleHook.js"
-          - "test/specs/examples/xpathdemo.js"
-          - "test/specs/swagLabs/login.js"
-          - "test/specs/swagLabs/order.js"
+          - "./test/specs/apiDemos/app/alert.js"
+          - "./test/specs/apiDemos/app/voiceRecognition.js"
+          - "./test/specs/apiDemos/views/views.js"
 
 jobs:
   build:
@@ -36,10 +29,13 @@ jobs:
       - name: Run tests with selected test file
         run: |
           TEST_FILE=${{ github.event.inputs.test_file }}
-          npx wdio config/wdio.bs.conf.js --spec $TEST_FILE
+          npx wdio ./config/wdio.bs.conf.api.demos.js --spec $TEST_FILE
         env:
           NODE_ENV: development
-      
+          BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          BROWSERSTACK_APP_KEY_API_DEMOS: ${{ secrets.BROWSERSTACK_APP_KEY_API_DEMOS }}
+          
       - uses: actions/upload-artifact@v3
         if: failure()
         with:

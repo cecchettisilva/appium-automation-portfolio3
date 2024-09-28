@@ -1,0 +1,42 @@
+name: CI Swag Labs APP
+on:
+  # push:
+  # pull_request:
+  workflow_dispatch:
+    inputs:
+      test_file:
+        description: "Select the test file to run"
+        required: true
+        default: "./test/specs/swagLabs/order.js"
+        type: choice
+        options:
+          - "./test/specs/swagLabs/login.js"
+          - "./test/specs/swagLabs/order.js"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 18
+      - name: Install
+        run: npm install
+
+      - name: Run tests with selected test file
+        run: |
+          TEST_FILE=${{ github.event.inputs.test_file }}
+          npx wdio ./config/wdio.bs.conf.swag.labs.js --spec $TEST_FILE
+        env:
+          NODE_ENV: development
+          BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          BROWSERSTACK_APP_KEY_SWAG_LABS: ${{ secrets.BROWSERSTACK_APP_KEY_SWAG_LABS }}
+      
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: test-results
+          path: ./test-results/
