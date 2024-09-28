@@ -8,7 +8,7 @@ exports.config = {
       [
         'browserstack',
         {
-          app: process.env.BROWSERSTACK_APP_KEY,
+          //app: 'general example',
           buildIdentifier: "12.0",
           browserstackLocal: true
         },
@@ -20,21 +20,21 @@ exports.config = {
         platformVersion: '12.0',
         platformName: 'android',
       }
-    }, {
-      'bstack:options': {
-        deviceName: 'Google Pixel 7 Pro',
-        platformVersion: '13.0',
-        platformName: 'android',
-      } }, {
-      'bstack:options': {
-        deviceName: 'OnePlus 9',
-        platformVersion: '11.0',
-        platformName: 'android',
-      }
+    // }, {
+    //   'bstack:options': {
+    //     deviceName: 'Google Pixel 7 Pro',
+    //     platformVersion: '13.0',
+    //     platformName: 'android',
+    //   } }, {
+    //   'bstack:options': {
+    //     deviceName: 'OnePlus 9',
+    //     platformVersion: '11.0',
+    //     platformName: 'android',
+    //   }
     }],
     commonCapabilities: {
       'bstack:options': {
-        projectName: "BrowserStack Sample",
+        projectName: "General example",
         buildName: "bstack-demo",
         testObservability: true,
         debug: true,
@@ -43,5 +43,5 @@ exports.config = {
         percyCaptureMode: false
       }
     },
-    maxInstances: 10,
+    maxInstances: 1,
 }

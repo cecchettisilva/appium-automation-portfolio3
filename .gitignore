@@ -40,3 +40,6 @@ allure-results
 
 #env
 .env
+
+#logs
+local.log
